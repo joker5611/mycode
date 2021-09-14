@@ -5,14 +5,15 @@
 import warnings
 
 import paramiko
-
+import json
 # filter out any warnings with the word Paramiko
 warnings.filterwarnings(action="ignore", module=".*paramiko.*")
 
 def main():
     """Our runtime code that calls other functions"""
     # describe the connection data
-    credz = [{"un": "bender", "ip": "10.10.2.3"}, {"un": "zoidberg", "ip": "10.10.2.5"}, {"un": "fry", "ip": "10.10.2.4"}]
+    with open("hosts.json") as jsonfile:
+        credz = json.load(jsonfile)
 
     # harvest private key for all 3 servers
     mykey = paramiko.RSAKey.from_private_key_file("/home/student/.ssh/id_rsa")
