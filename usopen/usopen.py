@@ -19,6 +19,7 @@ import pyexcel
 
 # python3 -m pip install --user netmiko
 from netmiko import ConnectHandler
+import bootstrapper
 
 ## retrieve data set from excel
 def retv_excel(par):
@@ -92,6 +93,18 @@ def main():
     print("\n***** BEGIN SHOW IP INT BRIEF *****")
     for x in entry.keys():
         print("\n" + interface_check(str(entry[x]), x, "admin", "alta3"))
+
+    ## Determine if new config should be applied && if so apply new config
+    print("\n***** NEW BOOTSTRAPPING CHECK *****")
+    ynchk = input("\nWould you like to apply a new configuration? y/N ")
+    if (ynchk.lower() == "y") or (ynchk.lower() == "yes"):  # if user input yes or y
+        conf_loc = input("\nWhere is the location of the new config file? ")
+        conf_ip = input("\nWhat is the IP address of the device to be configured? ")
+
+        if bootstrapper.bootstrapper(entry[conf_ip], conf_ip, "admin", "alta3", conf_loc):
+            print("\nNew configuration applied!")
+        else:
+            print("\nProblem in applying new configuration!")
 
 ## Call main()
 main()
