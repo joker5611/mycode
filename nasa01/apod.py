@@ -13,7 +13,7 @@ MYKEY = 'api_key=GUi3WOIHrksyfld4sz503GhgZlL0l9qymu4sMKTm' ## this is our api ke
 def main():
     
     dateanswer = input('would you like to specifiy the date to view?: Y or N  ')
-    if dateanswer == 'y':
+    if dateanswer.lower() == 'y':
         datecheck = input("supply date of the pic you want to see:YYY-MM-DD ")
         date = '&date=' + datecheck
 
