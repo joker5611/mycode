@@ -1,0 +1,23 @@
+
+---
+- name: Challenge playbook     # describes the playbook
+  hosts: renamed, !taz     # this is a reference to a group or host in the inventory
+  connection: ssh
+  gather_facts: no
+  become: true
+
+  vars:
+        username: "josh"
+
+  tasks:
+
+          - name: Ensure group "funkytown" exists
+            ansible.builtin.group:
+              name: funkytown
+              state: present
+
+          - name: Add the user 'joshj' with a specific uid and a primary group of 'admin'
+            ansible.builtin.user:
+               name: "{{ username }}"
+               comment: Josh J
+               group: funkytown
