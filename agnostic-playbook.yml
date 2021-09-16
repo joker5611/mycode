@@ -33,4 +33,7 @@
           - name: take a peek at "just" the JSON returned to the command "show interfaces"
             debug:
                     var: results.results[1]
-
+                
+          - name: challenge 
+            debug:
+                    var: results.results[1].stdout.

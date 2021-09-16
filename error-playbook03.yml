@@ -1,0 +1,30 @@
+---
+- name: First Error Handling
+  hosts: planetexpress
+  gather_facts: false  # we won't be using any facts
+  connection: ssh    # this is the default connection type for Ansible
+
+  tasks:
+
+    - name: A block is simply a group of tasks
+      block:
+
+              - name: The first task
+                shell: "echo 'My single task ran' > example.txt"
+
+              - name: The second task
+                shell: "echo 'My second task ran' >> example.txt"
+
+              - name: Trigger a FALSE
+                shell: "/bin/false"     # this always returns a false (fail)
+
+      rescue:
+
+              - name: A rescue task
+                shell: "echo 'My rescue code ran. Maybe it undoes whatever the block tried to do' >> example.txt"
+
+      always:
+
+              - name: An always task ALWAYS executes
+                shell: "echo 'This always runs. Maybe it is a commit, or an entry in a log' >> example.txt"
+
