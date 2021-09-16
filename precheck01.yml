@@ -1,0 +1,19 @@
+---
+- name: Building Precheck Failures
+  hosts: arista_switches        # group within the inventory to match on
+  connection: network_cli       # required when connecting to switch devices
+  become: yes
+  become_method: enable
+  gather_facts: yes             # this defines ansible_facts
+                                # (it runs *_facts on the target network switches)
+
+  vars:
+    ansible_ssh_pass: alta3
+
+  tasks:
+
+  # dig into the data we want to reveal
+  - name: Getting at network interfaces
+    debug:
+     var: ansible_facts
+
