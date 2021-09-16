@@ -36,4 +36,4 @@
                 
           - name: challenge 
             debug:
-                    var: results.results[1].stdout
+                    var: results.results[1].stdout_lines[2].split()[-1]
