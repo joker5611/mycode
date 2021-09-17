@@ -16,6 +16,11 @@
     myaddresses: ['192.168.2.101', '10.0.3.50', '171.172.32.1']
 
   tasks:
+    # the next task will require the netaddr package be installed on Python
+  - name: Install netaddr
+    pip:
+      name: netaddr
+
   # Use the Jinja ipaddr filter to reveal JUST IPs from a mixed list.
   - name: Just want the IPs
     debug:
@@ -56,11 +61,6 @@
   - name: Python way of capitalizing a string
     debug:
       msg: "{{ mytest_string.capitalize() }}"
-
-  # the next task will require the netaddr package be installed on Python
-  - name: Install netaddr
-    pip:
-      name: netaddr
 
   # Sometimes we need to use Python AND Jinja.
   # ipaddr returns all addresses that match the scope.
